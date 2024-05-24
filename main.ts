@@ -56,8 +56,8 @@ scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileDarkGrass1, function (
     info.changeLifeBy(-1)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
-    game.gameOver(true)
     game.showLongText("Bravo tu as terminé le niveau bonus", DialogLayout.Full)
+    game.gameOver(true)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
     game.gameOver(false)
@@ -203,7 +203,7 @@ myCorg = sprites.create(img`
     . . . . . f f f f f f . . . . . 
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.Player)
-controller.moveSprite(null, 100, 100)
+controller.moveSprite(myCorg, 100, 100)
 tiles.placeOnRandomTile(myCorg, sprites.dungeon.stairSouth)
 scene.cameraFollowSprite(myCorg)
 info.setLife(3)
