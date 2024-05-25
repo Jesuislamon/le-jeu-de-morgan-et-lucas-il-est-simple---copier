@@ -183,7 +183,7 @@ let le_mec_normal: Sprite = null
 let chien: Corgio = null
 let myCorg: Sprite = null
 game.showLongText("Bonne chance 🥳", DialogLayout.Full)
-info.startCountdown(400)
+info.startCountdown(100)
 tiles.setCurrentTilemap(tilemap`nivea5456`)
 myCorg = sprites.create(img`
     . . . . . . f f f f . . . . . . 
