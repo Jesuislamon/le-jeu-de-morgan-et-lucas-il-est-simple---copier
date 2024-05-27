@@ -1,5 +1,6 @@
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile0`, function (sprite, location) {
     sprites.destroy(chien)
+    info.changeScoreBy(1)
     tiles.setCurrentTilemap(tilemap`niveau10`)
     le_mec_normal = sprites.create(img`
         . . . . . . f f f f . . . . . . 
@@ -31,6 +32,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile6`, function (sprite, l
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.floorDark4, function (sprite, location) {
     tiles.setCurrentTilemap(tilemap`niveau14`)
+    info.changeScoreBy(1)
     tiles.setWallAt(tiles.getTileLocation(15, 6), true)
     tiles.setWallAt(tiles.getTileLocation(13, 6), true)
 })
@@ -39,6 +41,7 @@ scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileGrass3, function (spri
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.builtin.forestTiles0, function (sprite, location) {
     tiles.setCurrentTilemap(tilemap`niveau7`)
+    info.changeScoreBy(1)
     sprites.destroy(myCorg)
     sprites.destroy(mySprite2)
     chien = corgio.create(SpriteKind.Player)
@@ -55,6 +58,11 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.floorDarkDiamond, functio
 scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileDarkGrass1, function (sprite, location) {
     info.changeLifeBy(-1)
 })
+scene.onOverlapTile(SpriteKind.Player, sprites.swamp.swampTile3, function (sprite, location) {
+    info.startCountdown(200)
+    tiles.setWallAt(tiles.getTileLocation(2, 9), true)
+    tiles.setWallAt(tiles.getTileLocation(2, 10), true)
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
     game.showLongText("Bravo tu as terminé le niveau bonus", DialogLayout.Full)
     game.gameOver(true)
@@ -68,6 +76,10 @@ info.onCountdownEnd(function () {
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleBlueCrystal, function (sprite, location) {
     info.changeLifeBy(-1)
     tiles.setTileAt(location, sprites.castle.tilePath5)
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.greenSwitchDown, function (sprite, location) {
+    tiles.setWallAt(tiles.getTileLocation(2, 9), false)
+    tiles.setWallAt(tiles.getTileLocation(2, 10), false)
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileDarkGrass3, function (sprite, location) {
     info.changeLifeBy(-2)
@@ -86,6 +98,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardWater, function (sprite, location) {
     tiles.setCurrentTilemap(tilemap`niveau16`)
+    info.changeScoreBy(1)
     sprites.destroy(le_mec_normal)
     Cc = sprites.create(img`
         . . . . . f f 4 4 f f . . . . . 
@@ -108,6 +121,7 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardWater, function (sp
     controller.moveSprite(Cc)
     tiles.placeOnRandomTile(Cc, sprites.castle.saplingOak)
     scene.cameraFollowSprite(Cc)
+    sprites.destroy(myCorg)
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileDarkGrass2, function (sprite, location) {
     info.changeLifeBy(-2)
@@ -134,6 +148,7 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleRedCrystal, fu
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestOpen, function (sprite, location) {
     music.play(music.createSong(hex`0078000408010404001c00100500640000041e000004000000000000000000000000000a040004060014001800012405001c000f0a006400f4010a00000400000000000000000000000000000000020c0008000c00010d0c001000012506001c00010a006400f401640000040000000000000000000000000000000002060004000800011807001c00020a006400f4016400000400000000000000000000000000000000030600000004000124`), music.PlaybackMode.UntilDone)
     tiles.setCurrentTilemap(tilemap`niveau12`)
+    info.changeScoreBy(1)
     sprites.destroy(le_mec_normal)
     flapy_happy_hapy_bird = darts.create(img`
         f f 
@@ -146,6 +161,7 @@ scene.onOverlapTile(SpriteKind.Player, sprites.skillmap.islandTile4, function (s
     game.gameOver(false)
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
+    info.changeScoreBy(1)
     tiles.setCurrentTilemap(tilemap`niveau3`)
     tiles.placeOnRandomTile(myCorg, sprites.builtin.forestTiles6)
     tiles.setCurrentTilemap(tilemap`niveau3`)
@@ -183,7 +199,6 @@ let le_mec_normal: Sprite = null
 let chien: Corgio = null
 let myCorg: Sprite = null
 game.showLongText("Bonne chance 🥳", DialogLayout.Full)
-info.startCountdown(200)
 tiles.setCurrentTilemap(tilemap`nivea5456`)
 myCorg = sprites.create(img`
     . . . . . . f f f f . . . . . . 
@@ -207,4 +222,5 @@ controller.moveSprite(myCorg, 100, 100)
 tiles.placeOnRandomTile(myCorg, sprites.dungeon.stairSouth)
 scene.cameraFollowSprite(myCorg)
 info.setLife(3)
+info.setScore(0)
 music.play(music.createSong(hex`0032000408010305001c000f0a006400f4010a00000400000000000000000000000000000000020c0000000400012204000800012407001c00020a006400f4016400000400000000000000000000000000000000030c0004000800011408000c00012708001c000e050046006603320000040a002d00000064001400013200020100020600040008000111`), music.PlaybackMode.UntilDone)
